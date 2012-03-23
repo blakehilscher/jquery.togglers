@@ -1,0 +1,2 @@
+.togglers-contain .togglers-content { display: none; }
+.togglers-contain.togglers-active .togglers-content { display: block; }

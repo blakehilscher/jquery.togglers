@@ -1,0 +1,30 @@
+jQuery plugin for toggling the visibility of an element when another element is clicked. Built with triggers for easy extensibility.
+
+Simple usage:
+
+<div class="js-togglers">
+  I need to be toggled.
+</div>
+
+$('.js-togglers').togglers()
+
+
+Trigger usage:
+
+Using triggers to automatically hide other matching selectors on click or timeout:
+
+$('.items').togglers
+  after_initalize: (args) ->
+    _map = args.map
+    _sel = args.sel
+    _cls = args.cls
+    
+    # showing an item hides other items
+    _map.target.bind "before_show.togglers", -> _map.targets.trigger "_hide.togglers"
+    
+    # hide items on timeout if not in focus
+    _map.target.bind "hover_out.togglers", -> _map.target.trigger "hide_timeout.togglers"
+    _map.target.bind "hide_timeout.togglers", ->
+      clearTimeout(_map.timeout) if _map.timeout?
+      _map.timeout = setTimeout (=> _map.target.trigger("_hide.togglers") unless _map.contain.hasClass(_cls.hovering) ), 500
+    

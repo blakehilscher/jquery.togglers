@@ -1,0 +1,10 @@
+.togglers-contain{
+  .togglers-content{
+    display:none;
+  }
+  &.togglers-active{
+    .togglers-content{
+      display:block;
+    }
+  }
+}
